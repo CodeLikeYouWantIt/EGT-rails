@@ -15,12 +15,14 @@ class UsersController < ApplicationController
         last_name:params[:session][:last_name].capitalize,
         password:params[:session][:password]
       )
-      if user.save
+    if params[:session][:password] != params[:session][:validatepassword]
+      render json: "Passwords don't match", status: 422
+    elsif user.save
         # RegistrationMailer.welcome_email(@user).deliver!
         render json: "Account successfuly created", status: 201
-      else
-        render json: @user.errors.full_messages, status: 422
-      end
+    else
+        render json: "That email is taken", status: 422
+    end
   end
 
  # GET /users/1/edit
