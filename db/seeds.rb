@@ -10,7 +10,7 @@ User.create(
   email:"HectorFeurtado@gmail.com",
   first_name:"Hector",
   last_name:"Feurtado",
-  password:"123456"
+  password:""
 )
 
 User.create(
