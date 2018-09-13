@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     #If user login data are valid it will return the access_token so the
     #client app can use it for future request for the specific user.
   def create
-    user = User.find_by(email: params[:session][:email])
+    user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password])
         render :json => "Success", status: 200
       else
