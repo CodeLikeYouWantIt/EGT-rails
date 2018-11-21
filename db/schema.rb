@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_020353) do
 
   create_table "posts", force: :cascade do |t|
     t.string "name", null: false
-    t.text "description", null: false
+    t.text "body", null: false
     t.integer "likes"
     t.integer "user_id"
     t.integer "series_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_020353) do
 
   create_table "series", force: :cascade do |t|
     t.string "title", null: false
+    t.string "url", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +53,6 @@ ActiveRecord::Schema.define(version: 2018_09_07_020353) do
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "password_digest", null: false
-    t.string "access_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

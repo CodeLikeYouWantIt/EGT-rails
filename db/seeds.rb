@@ -10,7 +10,7 @@ User.create(
   email:"HectorFeurtado@gmail.com",
   first_name:"Hector",
   last_name:"Feurtado",
-  password:""
+  password:"123456"
 )
 
 User.create(
@@ -20,20 +20,42 @@ User.create(
   password:"123456"
 )
 
-Series.create(
-  title:"Promises",
-  user_id: User.find_by(email:"HectorFeurtado@gmail.com").id
-)
+3.times do
+  User.create(
+    email:Faker::Internet.email,
+    first_name:Faker::Name.first_name,
+    last_name:Faker::Name.last_name,
+    password:"123456"
+  )
+end
 
-Post.create(
-  name:"God will never forsake you",
-  description:"blah blah",
-  user_id: User.find_by(email:"HectorFeurtado@gmail.com").id,
-  series_id: Series.find_by(title:"Promises").id
-)
+users = User.all
 
-Comment.create(
-  body:"This was amazing. I never really viewed this scripture this way. Thank you Sandy!",
-  user_id:User.find_by(email:"Sandy@gmail.com").id,
-  post_id:Post.find_by(name:"God will never forsake you").id
-)
+20.times do
+  Series.create(
+    title:Faker::Book.genre,
+    url:Faker::LoremPixel.image,
+    user_id: User.find_by(email:users[1+rand(users.length-1)].email).id
+  )
+end
+
+series = Series.all
+
+20.times do 
+  Post.create(
+    name:Faker::Book.title,
+    body:Faker::Lorem.paragraph,
+    user_id: User.find_by(email:users[1+rand(users.length-1)].email).id,
+    series_id: Series.find_by(title:series[1+rand(series.length-1)].title).id
+  )
+end
+
+posts = Post.all
+
+20.times do
+  Comment.create(
+    body:"This was amazing. I never really viewed this scripture this way. Thank you Sandy!",
+    user_id:User.find_by(email:users[1+rand(users.length-1)].email).id,
+    post_id:Post.find_by(name:posts[1+rand(posts.length-1)].name).id
+  )
+end
