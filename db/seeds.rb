@@ -51,7 +51,7 @@ users = User.all
 20.times do |i|
   Series.create(
     title:Faker::Book.genre,
-    url:images[i],
+    url:images[1+rand(images.length-1)],
     user_id: User.find_by(email:users[1+rand(users.length-1)].email).id
   )
 end
