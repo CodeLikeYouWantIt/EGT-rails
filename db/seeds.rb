@@ -10,7 +10,6 @@ images = [
   "https://images.unsplash.com/photo-1535440216424-0e374e613ee5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=de52befc03f5f94872b48c3945b19819&auto=format&fit=crop&w=500&q=60",
   "https://images.unsplash.com/photo-1499509599374-00853a315a10?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6c21bb1665058349adcb211989d4e4c1&auto=format&fit=crop&w=500&q=60",
   "https://images.unsplash.com/photo-1436407886995-41f8f5ee43ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f5094931339c9c4be0089990ff9176b5&auto=format&fit=crop&w=500&q=60",
-  "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd750391ad812bfd4b0cc86d08c6dc1b&auto=format&fit=crop&w=500&q=60",
   "https://images.unsplash.com/photo-1519915734606-32d972e3b9b7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0bbf66b90ec9395dea2b22786ac6e3a4&auto=format&fit=crop&w=500&q=60",
   "https://images.unsplash.com/photo-1530798826479-d534c74df9c5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b46ea4e897248c475a32801f53fc6dea&auto=format&fit=crop&w=500&q=60",
   "https://images.unsplash.com/photo-1541039987211-04bf0587a903?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8473995e4bc8da12618cb1b5870ced78&auto=format&fit=crop&w=500&q=60",
@@ -51,7 +50,7 @@ users = User.all
 20.times do |i|
   Series.create(
     title:Faker::Book.genre,
-    url:images[i],
+    url:images[1+rand(images.length-1)],
     user_id: User.find_by(email:users[1+rand(users.length-1)].email).id
   )
 end

@@ -2,7 +2,7 @@ class SeriesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    series = Series.all
+    series = Series.all.order(:title)
 
     render json: series
   end
