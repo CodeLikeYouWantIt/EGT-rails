@@ -4,11 +4,13 @@ class SessionsController < ApplicationController
     #If user login data are valid it will return the access_token so the
     #client app can use it for future request for the specific user.
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
+    user = User.find_by(email: params[:session][:email])
       if user && user.authenticate(params[:session][:password])
         render :json => "Success", status: 200
-      else
-        render json: "Email and password combination are invalid", status: 422
+      elsif !user
+        render json: "That email doesn't exist", status: 422
+      elsif !user.authenticate(params[:session][:password])
+        render json: "Incorrect Password", status: 422
       end
   end
     #Verifies the access_token so the client app would know if to login the user.
