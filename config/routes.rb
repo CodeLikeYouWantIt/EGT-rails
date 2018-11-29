@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   resources :users, only: [:index, :new, :create, :update, :destroy]
   resources :series, only: [:index, :new, :create, :update, :destroy]
-  resources :posts, only: [:index, :new, :create, :update, :destroy]
+  resources :posts, only: [:index, :new, :create, :show, :update, :destroy]
   resources :comments, only: [:index, :new, :create, :update, :destroy]
 end
