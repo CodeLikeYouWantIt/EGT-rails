@@ -2,12 +2,18 @@ class AuthenticationController < ApplicationController
  skip_before_action :authenticate_request
 
  def authenticate
-   command = AuthenticateUser.call(params[:email], params[:password])
+    email = params[:email]
+    password = params[:password]
 
-   if command.success?
-     render json: { auth_token: command.result }
-   else
-     render json: { error: command.errors }, status: :unauthorized
-   end
- end
+    command = AuthenticateUser.call(params[:email], params[:password])
+    user = User.find_by(email:params[:email])
+    
+    if command.success?
+      render json: {auth_token: command.result, user_id: user.id}
+    elsif user.nil?
+      render json: "Email does not exits", status:422
+    else
+      render json: "Incorrect Password", status:422
+    end
+  end
 end
