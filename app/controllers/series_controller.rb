@@ -2,7 +2,7 @@ class SeriesController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
-    series = Series.all.order(:title)
+    series = Series.all.order(created_at: :desc)
 
     render json: series
   end
@@ -14,22 +14,19 @@ class SeriesController < ApplicationController
 
 
     # POST /users
-#   def create
-#     user = User.new(
-#         email:params[:session][:email].downcase,
-#         first_name:params[:session][:first_name].capitalize,
-#         last_name:params[:session][:last_name].capitalize,
-#         password:params[:session][:password]
-#       )
-#     if params[:session][:password] != params[:session][:validatepassword]
-#       render json: "Passwords don't match", status: 422
-#     elsif user.save
-#         # RegistrationMailer.welcome_email(@user).deliver!
-#         render json: "Account successfuly created", status: 201
-#     else
-#         render json: "That email is taken", status: 422
-#     end
-#   end
+  def create
+    serie = Series.create(
+      title:params[:title],
+      url:params[:url],
+      user_id:params[:user_id]
+    )
+
+    if serie
+      render json: "Success", status:200
+    elsif !serie
+      render json: "please try again", status:422
+    end
+  end
 
  # GET /users/1/edit
 #   def edit
