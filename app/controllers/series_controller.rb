@@ -52,13 +52,9 @@ class SeriesController < ApplicationController
 #   end
 
 #     # DELETE /users/1
-#   def destroy
-#     if @user.destroy
-#       render json: "Account has been deleted successfuly", status: 200
-#     else
-#       render json: "Something went wrong", status: 422
-#     end
-#   end
+  def destroy
+    binding.pry
+  end
 
 #     private
 #       # Never trust parameters from the scary internet, only allow the white list through.
