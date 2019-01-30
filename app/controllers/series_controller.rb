@@ -1,9 +1,7 @@
 class SeriesController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     series = Series.all.order(created_at: :desc)
-
     render json: series
   end
   
@@ -26,6 +24,11 @@ class SeriesController < ApplicationController
     elsif !serie
       render json: "please try again", status:422
     end
+  end
+
+  #     # DELETE /users/1
+  def deleteSeries
+      Series.find_by(id:params["id"]).destroy
   end
 
  # GET /users/1/edit
@@ -51,10 +54,7 @@ class SeriesController < ApplicationController
 #       render json: "update successful", status: 200
 #   end
 
-#     # DELETE /users/1
-  def destroy
-    binding.pry
-  end
+
 
 #     private
 #       # Never trust parameters from the scary internet, only allow the white list through.
