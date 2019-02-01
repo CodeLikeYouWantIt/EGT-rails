@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :update, :destroy]
   resources :series, only: [:index, :new, :create, :update]
 
+  resources :posts
+
   delete 'series', to: 'series#deleteSeries'
 
   namespace :series do 
-    resources :posts, only:[:show]
+    resources :posts, only:[:new, :show]
   end
 
   resources :posts, only: [:index, :new, :create, :show, :update, :destroy]
